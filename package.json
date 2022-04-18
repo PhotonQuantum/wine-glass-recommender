@@ -16,11 +16,13 @@
     "@mantine/hooks": "^4.1.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "tabler-icons-react": "^1.45.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
+    "@types/react-router-dom": "^5.3.3",
     "parcel": "^2.4.1",
     "sharp": "^0.29.1"
   }
