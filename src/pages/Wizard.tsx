@@ -232,6 +232,10 @@ export const Wizard = () => {
 
     const value = currentQuestion.opts ? Object.keys(draftChoice)[0] : draftChoice[currentStep];
 
+    if (currentQuestion.slides && !value) {
+        setDraftChoice({[currentStep]: 1});
+    }
+
     return (
         <Center pt={256}>
             <Transition transition={"fade"} duration={400} timingFunction={"ease"} mounted={mounted} onExited={() => {
