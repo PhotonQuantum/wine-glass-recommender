@@ -5,6 +5,7 @@ import {
     Center,
     Group,
     Image,
+    MantineTheme,
     SimpleGrid,
     Space,
     Stack,
@@ -13,8 +14,14 @@ import {
 } from "@mantine/core";
 import {Diamond, GlassFull, Omega, ShoppingCart} from "tabler-icons-react";
 import {useMediaQuery} from "@mantine/hooks";
+import {Categories, glasses} from "../glasses";
 
-const imgISO = new URL("../../resources/iso.jpg?as=webp", import.meta.url);
+const categoryToIcon: (theme: MantineTheme) => { [key in Categories]: JSX.Element } = (theme: MantineTheme) => ({
+    [Categories.crystal]: <Diamond strokeWidth={1}/>,
+    [Categories.red]: <GlassFull color={theme.colors.pink[7]} strokeWidth={1}/>,
+    [Categories.white]: <GlassFull color={theme.colors.lime[2]} strokeWidth={1}/>,
+    [Categories.universal]: <Omega strokeWidth={1}/>
+});
 
 export const Report = () => {
     const theme = useMantineTheme();
@@ -47,23 +54,32 @@ export const Report = () => {
                 </SimpleGrid>
                 <Space/>
                 <SimpleGrid cols={md ? 3 : 1}>
-                    <Card withBorder={true}>
-                        <Card.Section>
-                            <Box sx={{backgroundColor: "#ffffff"}}>
-                                <Image src={imgISO.toString()} height={223} fit={"contain"}/>
-                            </Box>
-                        </Card.Section>
-                        <Stack pt={10}>
-                            <Group spacing={5}><Omega strokeWidth={1}/><Diamond strokeWidth={1}/></Group>
-                            <Text weight={600}>ISO 杯</Text>
-                            <Text size={"sm"} weight={200}>
-                                合文格领格火风却，府西热者能至青个，论MG露此特。
-                            </Text>
-                            <ActionIcon size={"lg"} radius={"xl"}>
-                                <ShoppingCart strokeWidth={1}/>
-                            </ActionIcon>
-                        </Stack>
-                    </Card>
+                    {
+                        glasses.map((glass) => {
+                            return (
+                                <Card withBorder={true}>
+                                    <Card.Section>
+                                        <Box sx={{backgroundColor: "#ffffff"}}>
+                                            <Image src={glass.img.toString()} height={223} fit={"contain"}/>
+                                        </Box>
+                                    </Card.Section>
+                                    <Stack pt={10}>
+                                        <Group spacing={5}>
+                                            {glass.categories.map(category => (categoryToIcon(theme)[category]))}
+                                        </Group>
+                                        <Text weight={600}>{glass.name}</Text>
+                                        <Text size={"sm"} weight={200}>
+                                            {glass.description}
+                                        </Text>
+                                        <ActionIcon<'a'> component={"a"} href={glass.link} target={"_blank"}
+                                                         size={"lg"} radius={"xl"}>
+                                            <ShoppingCart strokeWidth={1}/>
+                                        </ActionIcon>
+                                    </Stack>
+                                </Card>
+                            )
+                        })
+                    }
                 </SimpleGrid>
             </Stack>
         </Center>
