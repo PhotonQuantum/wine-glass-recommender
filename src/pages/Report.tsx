@@ -12,20 +12,22 @@ import {
     useMantineTheme
 } from "@mantine/core";
 import {Diamond, GlassFull, Omega, ShoppingCart} from "tabler-icons-react";
+import {useMediaQuery} from "@mantine/hooks";
 
 const imgISO = new URL("../../resources/iso.jpg?as=webp", import.meta.url);
 
 export const Report = () => {
     const theme = useMantineTheme();
+    const md = useMediaQuery(`(min-width: ${theme.breakpoints.md}px)`);
     return (
         <Center>
-            <Stack pt={128} pl={50} spacing={30} sx={{maxWidth: 1000}}>
+            <Stack pt={md ? 128 : 30} px={50} spacing={30} sx={{maxWidth: 1000}}>
                 <Text size={"xl"} weight={300}>您的酒杯推荐</Text>
                 <Box>
                     <Text size={"md"} weight={300}>根据您的回答，您可能想要这些酒杯</Text>
                     <Text size={"md"} weight={300}>这些图标会帮助您挑选您的酒杯</Text>
                 </Box>
-                <SimpleGrid cols={3} sx={{maxWidth: 350}}>
+                <SimpleGrid cols={md ? 3 : 2} sx={{maxWidth: 350}}>
                     <Group>
                         <GlassFull color={theme.colors.pink[7]} strokeWidth={1}/>
                         <Text size={"md"} weight={300}>红酒杯</Text>
@@ -44,7 +46,7 @@ export const Report = () => {
                     </Group>
                 </SimpleGrid>
                 <Space/>
-                <SimpleGrid cols={3}>
+                <SimpleGrid cols={md ? 3 : 1}>
                     <Card withBorder={true}>
                         <Card.Section>
                             <Box sx={{backgroundColor: "#ffffff"}}>
