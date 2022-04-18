@@ -48,7 +48,7 @@ export const glasses = [
         categories: [Categories.red],
         description: "西拉葡萄酒杯，比一般的红葡萄酒杯要小。它的杯口快速向内收缩，能让葡萄酒的果香先散发出来聚集在杯口，平衡单宁与果香的风味。",
         price: "¥206.94",
-        img: new URL("../resources/syrah.jpg?as=webp", import.meta.url),
+        img: new URL("../resources/syrah.png?as=webp", import.meta.url),
         link: "https://www.amazon.com/dp/B000NAXZ9A",
         keywords: ["red", "tanin", "flavor"]
     },
@@ -102,7 +102,7 @@ export const glasses = [
         categories: [Categories.white],
         description: "长相思杯的杯颈比较长，杯体窄，整体看起来细长，这种杯型能够聚集香气，并防止过多空气混入酒中。",
         price: "¥155.94",
-        img: new URL("../resources/sauvignon_blanc.jpg?as=webp", import.meta.url),
+        img: new URL("../resources/sauvignon_blanc.png?as=webp", import.meta.url),
         link: "https://www.amazon.com/dp/B0062N2NLI",
         keywords: ["white", "flavor"]
     },
@@ -111,7 +111,7 @@ export const glasses = [
         categories: [Categories.crystal, Categories.sparkling],
         description: "笛型酒杯使酒液表面积大大减少，有助于保持气泡，另外修长的外型也便于观赏晶莹剔透的气泡自杯底至液面完整而欢快的升腾过程，强化品尝的愉悦感。",
         price: "¥45.32",
-        img: new URL("../resources/flute.jpg?as=webp", import.meta.url),
+        img: new URL("../resources/flute.png?as=webp", import.meta.url),
         link: "https://www.amazon.com/dp/B09F7ZKDJ8",
         keywords: ["sparkling"]
     },
