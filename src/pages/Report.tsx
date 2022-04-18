@@ -15,6 +15,8 @@ import {
 import {ChartBubble, Diamond, GlassFull, Omega, ShoppingCart} from "tabler-icons-react";
 import {useMediaQuery} from "@mantine/hooks";
 import {Categories, glasses} from "../glasses";
+import {useRecoilState} from "recoil";
+import {wizardKeywordState} from "../states";
 
 const categoryToIcon: (theme: MantineTheme) => { [key in Categories]: JSX.Element } =
     (theme) => ({
@@ -28,6 +30,9 @@ const categoryToIcon: (theme: MantineTheme) => { [key in Categories]: JSX.Elemen
 export const Report = () => {
     const theme = useMantineTheme();
     const md = useMediaQuery(`(min-width: ${theme.breakpoints.md}px)`);
+
+    const [wizardKeyword] = useRecoilState(wizardKeywordState);
+
     return (
         <Center>
             <Stack pt={md ? 128 : 30} px={50} spacing={30} sx={{maxWidth: 1000}}>
@@ -61,30 +66,35 @@ export const Report = () => {
                 <Space/>
                 <SimpleGrid cols={md ? 3 : 1}>
                     {
-                        glasses.map((glass) => {
-                            return (
-                                <Card withBorder={true} sx={{display: "flex", flexDirection: "column"}}>
-                                    <Card.Section>
-                                        <Box sx={{backgroundColor: "#ffffff"}}>
-                                            <Image src={glass.img.toString()} height={223} fit={"contain"}/>
-                                        </Box>
-                                    </Card.Section>
-                                    <Stack pt={10} sx={{flexGrow: 1}}>
-                                        <Group spacing={5}>
-                                            {glass.categories.map(category => (categoryToIcon(theme)[category]))}
-                                        </Group>
-                                        <Text weight={600}>{glass.name}</Text>
-                                        <Text size={"sm"}>
-                                            {glass.description}
-                                        </Text>
-                                        <ActionIcon<'a'> component={"a"} href={glass.link} target={"_blank"}
-                                                         size={"lg"} radius={"xl"} mt={"auto"}>
-                                            <ShoppingCart strokeWidth={1}/>
-                                        </ActionIcon>
-                                    </Stack>
-                                </Card>
-                            )
-                        })
+                        glasses
+                            .filter((glass) => {
+                                return glass.keywords.includes("iso") || wizardKeyword.every(keyword => glass.keywords.includes(keyword));
+                            })
+                            .map((glass) => {
+                                return (
+                                    <Card key={glass.name} withBorder={true}
+                                          sx={{display: "flex", flexDirection: "column"}}>
+                                        <Card.Section>
+                                            <Box sx={{backgroundColor: "#ffffff"}}>
+                                                <Image src={glass.img.toString()} height={223} fit={"contain"}/>
+                                            </Box>
+                                        </Card.Section>
+                                        <Stack pt={10} sx={{flexGrow: 1}}>
+                                            <Group spacing={5}>
+                                                {glass.categories.map(category => (categoryToIcon(theme)[category]))}
+                                            </Group>
+                                            <Text weight={600}>{glass.name}</Text>
+                                            <Text size={"sm"}>
+                                                {glass.description}
+                                            </Text>
+                                            <ActionIcon<'a'> component={"a"} href={glass.link} target={"_blank"}
+                                                             size={"lg"} radius={"xl"} mt={"auto"}>
+                                                <ShoppingCart strokeWidth={1}/>
+                                            </ActionIcon>
+                                        </Stack>
+                                    </Card>
+                                )
+                            })
                     }
                 </SimpleGrid>
             </Stack>
