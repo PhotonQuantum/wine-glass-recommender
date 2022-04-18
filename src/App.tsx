@@ -1,6 +1,6 @@
-import {Button, Center, Grid, MantineProvider, Text} from "@mantine/core";
-import {useState} from "react";
+import {MantineProvider} from "@mantine/core";
 import {Main} from "./Main";
+import "@fontsource/julius-sans-one"
 
 export const App = () => {
     return (
@@ -9,8 +9,9 @@ export const App = () => {
             fontSizes: {
                 xl: 68
             },
+            primaryColor: "pink"
         }} withGlobalStyles withNormalizeCSS withCSSVariables>
-            <Main />
+            <Main/>
         </MantineProvider>
     )
 }
