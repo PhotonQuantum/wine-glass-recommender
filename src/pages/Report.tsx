@@ -36,7 +36,7 @@ export const Report = () => {
                     <Text size={"md"}>根据您的回答，您可能想要这些酒杯</Text>
                     <Text size={"md"}>这些图标会帮助您挑选您的酒杯</Text>
                 </Box>
-                <SimpleGrid cols={md ? 3 : 2} sx={{maxWidth: 350}}>
+                <SimpleGrid cols={md ? 3 : 2} sx={{maxWidth: 400}}>
                     <Group>
                         <GlassFull color={theme.colors.pink[7]} strokeWidth={1}/>
                         <Text size={"md"}>红葡萄酒杯</Text>
