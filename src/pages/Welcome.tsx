@@ -1,4 +1,5 @@
 import {Box, Button, Image, Overlay, Space, Stack, Text, useMantineTheme} from "@mantine/core";
+import {Link} from "react-router-dom";
 
 const headlineUrl = new URL("../../resources/headline.png?as=webp", import.meta.url);
 
@@ -20,24 +21,28 @@ export const Welcome = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                zIndex: 999
+                zIndex: 999,
+                display: "flex",
             }}>
-                <Stack pl={60} pt={100} spacing={0}>
+                <Space sx={{flexGrow: 1}}/>
+                <Stack px={60} pt={100} spacing={0} sx={{flexGrow: 1}}>
                     <Box sx={{display: "flex"}}>
-                        <Text size="xl" variant={"gradient"} weight={300}
-                              gradient={{from: 'pink', to: 'violet', deg: 135}}>
+                        <Text variant={"gradient"} weight={300}
+                              gradient={{from: 'pink', to: 'violet', deg: 135}}
+                              sx={{fontSize: 68}}>
                             葡萄酒
                         </Text>
                         <Box sx={{flexGrow: 1}}/>
                     </Box>
-                    <Text size="xl" weight={300} sx={{lineHeight: 1}}>与玻璃酒杯</Text>
+                    <Text weight={300} sx={{fontSize: 68, lineHeight: 1}}>与玻璃酒杯</Text>
                     <Space pt={60}/>
-                    <Button variant={"gradient"} gradient={{
+                    <Button<typeof Link> component={Link} to="/wizard" variant={"gradient"} gradient={{
                         from: 'pink',
                         to: 'violet',
                         deg: 135
-                    }} sx={{maxWidth: 300}} size={"lg"}>寻找我的酒杯</Button>
+                    }} sx={{maxWidth: 300}} size={"md"}>寻找我的酒杯</Button>
                 </Stack>
+                <Space sx={{flexGrow: 2}}/>
             </Box>
         </Box>
     )

@@ -1,17 +1,21 @@
 import {MantineProvider} from "@mantine/core";
 import {Main} from "./Main";
 import "@fontsource/julius-sans-one"
+import {BrowserRouter as Router} from "react-router-dom";
 
 export const App = () => {
     return (
         <MantineProvider theme={{
             colorScheme: "dark",
             fontSizes: {
-                xl: 68
+                xl: 48,
+                lg: 28,
             },
             primaryColor: "pink"
         }} withGlobalStyles withNormalizeCSS withCSSVariables>
-            <Main/>
+            <Router>
+                <Main/>
+            </Router>
         </MantineProvider>
     )
 }
