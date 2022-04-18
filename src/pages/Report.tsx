@@ -17,6 +17,8 @@ import {useMediaQuery} from "@mantine/hooks";
 import {Categories, glasses} from "../glasses";
 import {useRecoilState} from "recoil";
 import {wizardKeywordState} from "../states";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 const categoryToIcon: (theme: MantineTheme) => { [key in Categories]: JSX.Element } =
     (theme) => ({
@@ -30,8 +32,15 @@ const categoryToIcon: (theme: MantineTheme) => { [key in Categories]: JSX.Elemen
 export const Report = () => {
     const theme = useMantineTheme();
     const md = useMediaQuery(`(min-width: ${theme.breakpoints.md}px)`);
+    const navigate = useNavigate();
 
     const [wizardKeyword] = useRecoilState(wizardKeywordState);
+
+    useEffect(() => {
+        if (wizardKeyword.length == 0) {
+            navigate("/");
+        }
+    }, [wizardKeyword]);
 
     return (
         <Center>
