@@ -1,10 +1,13 @@
 import {Box, Button, Image, Overlay, Space, Stack, Text, useMantineTheme} from "@mantine/core";
 import {Link} from "react-router-dom";
+import {useViewportSize} from "@mantine/hooks";
 
 const headlineUrl = new URL("../../resources/headline.png?as=webp", import.meta.url);
 
 export const Welcome = () => {
     const theme = useMantineTheme();
+    const {height: vh} = useViewportSize();
+
     return (
         <Box px={0} sx={{
             position: "relative",
@@ -12,7 +15,7 @@ export const Welcome = () => {
             alignItems: "center",
             justifyContent: "center",
         }}>
-            <Image src={headlineUrl.toString()} width={"100vw"} height={500} fit={"cover"}/>
+            <Image src={headlineUrl.toString()} width={"100vw"} height={vh - 50} fit={"cover"}/>
             <Overlay
                 gradient={`linear-gradient(90deg, ${theme.black} 0%, ${theme.black} 100%)`}/>
             <Box sx={{
@@ -25,7 +28,7 @@ export const Welcome = () => {
                 display: "flex",
             }}>
                 <Space sx={{flexGrow: 1}}/>
-                <Stack px={60} pt={100} spacing={0} sx={{flexGrow: 1}}>
+                <Stack px={60} pt={(vh - 400) / 3} spacing={0} sx={{flexGrow: 1}}>
                     <Box sx={{display: "flex"}}>
                         <Text variant={"gradient"} weight={300}
                               gradient={{from: 'pink', to: 'violet', deg: 135}}
@@ -45,5 +48,5 @@ export const Welcome = () => {
                 <Space sx={{flexGrow: 2}}/>
             </Box>
         </Box>
-    )
+    );
 }

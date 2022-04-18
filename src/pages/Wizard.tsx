@@ -247,7 +247,7 @@ export const Wizard = () => {
     }
 
     return (
-        <Stack sx={{height: vh - 70}}>
+        <Stack sx={{height: vh - 50}}>
             {md &&
                 <Box sx={{
                     position: "relative",
@@ -255,7 +255,7 @@ export const Wizard = () => {
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
-                    <Image src={headlineUrl.toString()} width={"100vw"} height={(vh - 70) / 4} fit={"cover"}/>
+                    <Image src={headlineUrl.toString()} width={"100vw"} height={(vh - 50) / 4} fit={"cover"}/>
                     <Overlay
                         gradient={`linear-gradient(90deg, ${theme.black} 0%, ${theme.black} 100%)`}/>
                 </Box>
