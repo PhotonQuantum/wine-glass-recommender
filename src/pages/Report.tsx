@@ -38,7 +38,7 @@ export const Report = () => {
             <Stack pt={md ? 128 : 30} px={50} spacing={30} sx={{maxWidth: 1000}}>
                 <Text size={"xl"} weight={300}>您的酒杯推荐</Text>
                 <Box>
-                    <Text size={"md"}>根据您的回答，您可能想要这些酒杯</Text>
+                    <Text size={"md"}>根据您的回答，以下是您可能想要的酒杯</Text>
                     <Text size={"md"}>这些图标会帮助您挑选您的酒杯</Text>
                 </Box>
                 <SimpleGrid cols={md ? 3 : 2} sx={{maxWidth: 400}}>
@@ -64,7 +64,7 @@ export const Report = () => {
                     </Group>
                 </SimpleGrid>
                 <Space/>
-                <SimpleGrid cols={md ? 3 : 1}>
+                <SimpleGrid cols={md ? 3 : 1} spacing={30}>
                     {
                         glasses
                             .filter((glass) => {
@@ -73,14 +73,14 @@ export const Report = () => {
                             .map((glass) => {
                                 return (
                                     <Card key={glass.name} withBorder={true}
-                                          sx={{display: "flex", flexDirection: "column"}}>
+                                          sx={{display: "flex", flexDirection: "column", maxWidth: 400}}>
                                         <Card.Section>
                                             <Box sx={{backgroundColor: "#ffffff"}}>
                                                 <Image src={glass.img.toString()} height={223} fit={"contain"}/>
                                             </Box>
                                         </Card.Section>
                                         <Stack pt={10} sx={{flexGrow: 1}}>
-                                            <Group spacing={5}>
+                                            <Group spacing={5} pt={10}>
                                                 {glass.categories.map(category => (categoryToIcon(theme)[category]))}
                                             </Group>
                                             <Text weight={600}>{glass.name}</Text>

@@ -17,7 +17,7 @@ export const glasses = [
         keywords: ["iso"]
     },
     // {
-    //     name: "Riedel Heart to Heart Cabernet Sauvignon Glass",
+    //     name: "Riedel Heart Cabernet Sauvignon Glass",
     //     categories: [Categories.crystal, Categories.red],
     //     description: "赤霞珠杯修长的杯身有利于控制酒液在舌头的中部达到单宁、果味以及酸度的平衡，较为平缓的杯身弧度可放缓酒液的流动速度，使酸度获得提升，淡化单宁的苦涩感。无铅水晶玻璃更好地反映酒色，薄内壁使口感更佳。",
     //     price: "¥126.08",
@@ -53,7 +53,7 @@ export const glasses = [
         keywords: ["red", "tanin", "flavor"]
     },
     {
-        name: "Riedel Heart to Heart Pinot Noir Glass",
+        name: "Riedel Heart Pinot Noir Glass",
         categories: [Categories.crystal, Categories.red],
         description: "黑皮诺杯的杯身较大，向内收口的黑皮诺酒杯，能让葡萄酒呼吸以散发更多香气，杯口小以凝聚香气，并且可以让酒液在口里缓慢铺开以欣赏其精致和韵味。无铅水晶玻璃更好地反映酒色，薄内壁使口感更佳",
         price: "¥120.09",
@@ -80,7 +80,7 @@ export const glasses = [
         keywords: ["red", "flavor"]
     },
     {
-        name: "Riedel Heart to Heart Riesling Glass",
+        name: "Riedel Heart Riesling Glass",
         categories: [Categories.crystal, Categories.white],
         description: "雷司令杯的杯肚与杯沿都较窄，而杯身较高。杯口向上微收，可以将将酒中的水果香味集中在酒杯的上半部分。入口时引导酒液先接触到舌尖的甜味区域，缓和酒本身的酸涩感。无铅水晶玻璃更好地反映酒色，薄内壁使口感更佳。",
         price: "¥127.30",
@@ -89,7 +89,7 @@ export const glasses = [
         keywords: ["white", "sour", "flavor"]
     },
     {
-        name: "Riedel Heart to Heart Chardonnay Glass",
+        name: "Riedel Heart Chardonnay Glass",
         categories: [Categories.crystal, Categories.white],
         description: "霞多丽杯的杯体较宽，杯口只稍微收小。杯子的设计可以让酒先流向舌尖和舌头中部，可以先品尝到酒的甜味，然后再扩散开。无铅水晶玻璃更好地反映酒色，薄内壁使口感更佳。",
         price: "¥155.94",

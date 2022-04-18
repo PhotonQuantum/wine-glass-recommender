@@ -1,20 +1,27 @@
 import {
+    Box,
     Button,
     Center,
     Container,
     Group,
+    Image,
+    Overlay,
     Radio,
     RadioGroup,
     Slider,
     Space,
     Stack,
     Text,
-    Transition
+    Transition,
+    useMantineTheme
 } from "@mantine/core";
 import {useNavigate} from "react-router-dom";
 import React, {Reducer, useEffect, useReducer, useState} from "react";
 import {useSetRecoilState} from "recoil";
 import {wizardKeywordState} from "../states";
+import {useMediaQuery, useViewportSize} from "@mantine/hooks";
+
+const headlineUrl = new URL("../../resources/headline.png?as=webp", import.meta.url);
 
 interface OptionChoice {
     id: number,
@@ -183,8 +190,11 @@ const reducer: Reducer<questionState, stepAction> = (state, action) => {
 };
 
 export const Wizard = () => {
+    const theme = useMantineTheme();
     const navigate = useNavigate();
     const setWizardKeyword = useSetRecoilState(wizardKeywordState);
+    const {height: vh} = useViewportSize();
+    const md = useMediaQuery(`(min-width: ${theme.breakpoints.md}px)`);
 
     const [{currentStep, immediateAction, choice}, dispatch] = useReducer(reducer, initialState);
     const [draftChoice, setDraftChoice] = useState<Record<string, number>>({});
@@ -237,75 +247,90 @@ export const Wizard = () => {
     }
 
     return (
-        <Center pt={256}>
-            <Transition transition={"fade"} duration={400} timingFunction={"ease"} mounted={mounted} onExited={() => {
-                pendingFn.fn();
-                pendingFn.fn = () => {
-                };
-                setMounted(true);
-            }}>
-                {(styles) => (
-                    <Container sx={{maxWidth: 800}} px={30} style={styles}>
-                        <Stack spacing={60}>
-                            <Text weight={300} size={"xl"}>{currentQuestion.question}</Text>
-                            {currentQuestion.opts ? (
-                                <RadioGroup value={value as string}
-                                            orientation={"vertical"}
-                                            onChange={(value) => setDraftChoice({[value]: 0})}>
-                                    {
-                                        Object.keys(currentQuestion.opts).map(key => {
-                                            const value: OptionChoice = currentQuestion.opts![key];
-                                            return {key, value}
-                                        }).sort(({key: _1, value: v1}, {key: _2, value: v2}) => (
-                                            v1.id - v2.id
-                                        )).map(({key, value}) => {
-                                            const idx = String.fromCharCode('A'.charCodeAt(0) + value.id);
-                                            return (<Radio key={`${currentStep}-${key}$`} value={key} label={<Group>
-                                                <Text weight={100} sx={{fontSize: 36}}>{idx}.</Text>
-                                                <Text weight={300} size={"lg"}>{value.label}</Text>
-                                            </Group>}/>)
-                                        })
-                                    }
-                                </RadioGroup>
-                            ) : (
-                                <Slider
-                                    label={(val) => currentQuestion.slides!.find((mark) => mark.value == val)!.label}
-                                    marks={currentQuestion.slides}
-                                    min={1}
-                                    max={3}
-                                    value={value as number || 1}
-                                    onChange={(value) => setDraftChoice({[currentStep]: value})}
-                                    key={currentStep}
-                                />
-                            )}
-                            <Group>
-                                <Space sx={{flexGrow: 1}}/>
-                                <Button radius={"xs"} variant={"subtle"} sx={{minWidth: 120, fontWeight: 400}}
-                                        onClick={() => {
-                                            setPendingFn({
-                                                fn: () => {
-                                                    dispatch({type: "prev"});
-                                                    setDraftChoice({});
-                                                }
-                                            });
-                                            setMounted(false);
-                                        }}>返回</Button>
-                                <Button disabled={!value} radius={"xs"} variant={"outline"}
-                                        sx={{minWidth: 120, fontWeight: 400}}
-                                        onClick={() => {
-                                            setPendingFn({
-                                                fn: () => {
-                                                    dispatch({type: "next", incremental: draftChoice});
-                                                    setDraftChoice({});
-                                                }
-                                            });
-                                            setMounted(false);
-                                        }}>确认</Button>
-                            </Group>
-                        </Stack>
-                    </Container>
-                )}
-            </Transition>
-        </Center>
+        <Stack sx={{height: vh - 70}}>
+            {md &&
+                <Box sx={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <Image src={headlineUrl.toString()} width={"100vw"} height={(vh - 70) / 4} fit={"cover"}/>
+                    <Overlay
+                        gradient={`linear-gradient(90deg, ${theme.black} 0%, ${theme.black} 100%)`}/>
+                </Box>
+            }
+            <Center my={"auto"} pb={40}>
+                <Transition transition={"fade"} duration={400} timingFunction={"ease"} mounted={mounted}
+                            onExited={() => {
+                                pendingFn.fn();
+                                pendingFn.fn = () => {
+                                };
+                                setMounted(true);
+                            }}>
+                    {(styles) => (
+                        <Container sx={{maxWidth: 800}} px={30} style={styles}>
+                            <Stack spacing={60}>
+                                <Text weight={300} size={"xl"}>{currentQuestion.question}</Text>
+                                {currentQuestion.opts ? (
+                                    <RadioGroup value={value as string}
+                                                orientation={"vertical"}
+                                                onChange={(value) => setDraftChoice({[value]: 0})}>
+                                        {
+                                            Object.keys(currentQuestion.opts).map(key => {
+                                                const value: OptionChoice = currentQuestion.opts![key];
+                                                return {key, value}
+                                            }).sort(({key: _1, value: v1}, {key: _2, value: v2}) => (
+                                                v1.id - v2.id
+                                            )).map(({key, value}) => {
+                                                const idx = String.fromCharCode('A'.charCodeAt(0) + value.id);
+                                                return (<Radio key={`${currentStep}-${key}$`} value={key} label={<Group>
+                                                    <Text weight={100} sx={{fontSize: 36}}>{idx}.</Text>
+                                                    <Text weight={300} size={"lg"}>{value.label}</Text>
+                                                </Group>}/>)
+                                            })
+                                        }
+                                    </RadioGroup>
+                                ) : (
+                                    <Slider
+                                        label={(val) => currentQuestion.slides!.find((mark) => mark.value == val)!.label}
+                                        marks={currentQuestion.slides}
+                                        min={1}
+                                        max={3}
+                                        value={value as number || 1}
+                                        onChange={(value) => setDraftChoice({[currentStep]: value})}
+                                        key={currentStep}
+                                    />
+                                )}
+                                <Group>
+                                    <Space sx={{flexGrow: 1}}/>
+                                    <Button radius={"xs"} variant={"subtle"} sx={{minWidth: 120, fontWeight: 400}}
+                                            onClick={() => {
+                                                setPendingFn({
+                                                    fn: () => {
+                                                        dispatch({type: "prev"});
+                                                        setDraftChoice({});
+                                                    }
+                                                });
+                                                setMounted(false);
+                                            }}>返回</Button>
+                                    <Button disabled={!value} radius={"xs"} variant={"outline"}
+                                            sx={{minWidth: 120, fontWeight: 400}}
+                                            onClick={() => {
+                                                setPendingFn({
+                                                    fn: () => {
+                                                        dispatch({type: "next", incremental: draftChoice});
+                                                        setDraftChoice({});
+                                                    }
+                                                });
+                                                setMounted(false);
+                                            }}>确认</Button>
+                                </Group>
+                            </Stack>
+                        </Container>
+                    )}
+                </Transition>
+            </Center>
+        </Stack>
     );
 }
