@@ -44,7 +44,7 @@ export const Report = () => {
 
     return (
         <Center>
-            <Stack pt={md ? 128 : 30} px={50} spacing={30} sx={{maxWidth: 1000}}>
+            <Stack py={md ? 128 : 30} px={50} spacing={30} sx={{maxWidth: 1000}}>
                 <Text size={"xl"} weight={300}>您的酒杯推荐</Text>
                 <Box>
                     <Text size={"md"}>根据您的回答，以下是您可能想要的酒杯</Text>
