@@ -2,7 +2,8 @@ export enum Categories {
     crystal,
     universal,
     red,
-    white
+    white,
+    sparkling
 }
 
 export const glasses = [

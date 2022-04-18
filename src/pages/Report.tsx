@@ -12,7 +12,7 @@ import {
     Text,
     useMantineTheme
 } from "@mantine/core";
-import {Diamond, GlassFull, Omega, ShoppingCart} from "tabler-icons-react";
+import {ChartBubble, Diamond, GlassFull, Omega, ShoppingCart} from "tabler-icons-react";
 import {useMediaQuery} from "@mantine/hooks";
 import {Categories, glasses} from "../glasses";
 
@@ -21,7 +21,8 @@ const categoryToIcon: (theme: MantineTheme) => { [key in Categories]: JSX.Elemen
         [Categories.crystal]: <Diamond strokeWidth={1}/>,
         [Categories.red]: <GlassFull color={theme.colors.pink[7]} strokeWidth={1}/>,
         [Categories.white]: <GlassFull color={theme.colors.lime[2]} strokeWidth={1}/>,
-        [Categories.universal]: <Omega strokeWidth={1}/>
+        [Categories.universal]: <Omega strokeWidth={1}/>,
+        [Categories.sparkling]: <ChartBubble strokeWidth={1}/>
     });
 
 export const Report = () => {
@@ -38,11 +39,15 @@ export const Report = () => {
                 <SimpleGrid cols={md ? 3 : 2} sx={{maxWidth: 350}}>
                     <Group>
                         <GlassFull color={theme.colors.pink[7]} strokeWidth={1}/>
-                        <Text size={"md"}>红酒杯</Text>
+                        <Text size={"md"}>红葡萄酒杯</Text>
                     </Group>
                     <Group>
                         <GlassFull color={theme.colors.lime[2]} strokeWidth={1}/>
-                        <Text size={"md"}>白酒杯</Text>
+                        <Text size={"md"}>白葡萄酒杯</Text>
+                    </Group>
+                    <Group>
+                        <ChartBubble strokeWidth={1}/>
+                        <Text size={"md"}>起泡酒杯</Text>
                     </Group>
                     <Group>
                         <Omega strokeWidth={1}/>
@@ -50,7 +55,7 @@ export const Report = () => {
                     </Group>
                     <Group>
                         <Diamond strokeWidth={1}/>
-                        <Text size={"md"}>水晶杯</Text>
+                        <Text size={"md"}>水晶材质</Text>
                     </Group>
                 </SimpleGrid>
                 <Space/>
