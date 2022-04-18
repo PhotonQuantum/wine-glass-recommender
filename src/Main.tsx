@@ -1,15 +1,11 @@
 import {AppShell, Group, Header, Text, ThemeIcon} from "@mantine/core";
 import {Glass} from "tabler-icons-react";
-import {Link, Route, Routes, useLocation} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
 import {Welcome} from "./pages/Welcome";
 import {Wizard} from "./pages/Wizard";
 import {Report} from "./pages/Report";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
-import "./transition.css"
 
 export const Main = () => {
-    const location = useLocation();
-
     return (
         <>
             <AppShell padding={0}
@@ -25,15 +21,11 @@ export const Main = () => {
                               </Group>
                           </Header>
                       }>
-                <TransitionGroup>
-                    <CSSTransition key={location.key} exit={false} classNames={"fade"} timeout={400}>
-                        <Routes>
-                            <Route path={"/"} element={<Welcome/>}/>
-                            <Route path={"/wizard"} element={<Wizard/>}/>
-                            <Route path={"/report"} element={<Report/>}/>
-                        </Routes>
-                    </CSSTransition>
-                </TransitionGroup>
+                <Routes>
+                    <Route path={"/"} element={<Welcome/>}/>
+                    <Route path={"/wizard"} element={<Wizard/>}/>
+                    <Route path={"/report"} element={<Report/>}/>
+                </Routes>
             </AppShell>
         </>
     )
